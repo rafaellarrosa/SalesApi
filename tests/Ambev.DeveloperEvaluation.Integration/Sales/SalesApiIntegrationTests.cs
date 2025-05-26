@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Ambev.DeveloperEvaluation.Integration.Common;
 using Ambev.DeveloperEvaluation.WebApi;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
@@ -13,7 +14,7 @@ namespace Ambev.DeveloperEvaluation.Integration.Sales;
 /// Contains integration tests for the Sales API.
 /// Tests cover end-to-end scenarios including creation, retrieval, listing, and cancellation.
 /// </summary>
-public class SalesApiIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+public class SalesApiIntegrationTests : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;
 
@@ -21,7 +22,7 @@ public class SalesApiIntegrationTests : IClassFixture<WebApplicationFactory<Prog
     /// Initializes a new instance of <see cref="SalesApiIntegrationTests"/>.
     /// </summary>
     /// <param name="factory">The WebApplicationFactory instance for the API.</param>
-    public SalesApiIntegrationTests(WebApplicationFactory<Program> factory)
+    public SalesApiIntegrationTests(CustomWebApplicationFactory factory)
     {
         _client = factory.CreateClient();
     }
@@ -113,7 +114,7 @@ public class SalesApiIntegrationTests : IClassFixture<WebApplicationFactory<Prog
     [Fact(DisplayName = "DELETE /api/sales/{id} should cancel sale")]
     public async Task Delete_CancelSale_ShouldReturnOk()
     {
-        // First create a sale
+        // Arrange — cria uma sale primeiro
         var createRequest = new CreateSaleRequest
         {
             Customer = "Company DEF",
@@ -133,7 +134,7 @@ public class SalesApiIntegrationTests : IClassFixture<WebApplicationFactory<Prog
         var createResponse = await _client.PostAsJsonAsync("/api/sales", createRequest);
         var createdContent = await createResponse.Content.ReadFromJsonAsync<ApiResponseWithData<CreateSaleResponse>>();
 
-        // Act
+        // Act — faz o DELETE
         var response = await _client.DeleteAsync($"/api/sales/{createdContent!.Data.Id}");
 
         // Assert
