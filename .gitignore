@@ -1,0 +1,159 @@
+﻿##################################
+# Build artifacts
+##################################
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+##################################
+# User-specific files
+##################################
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+##################################
+# Rider files
+##################################
+*.DotSettings.user
+
+##################################
+# OS generated files
+##################################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+##################################
+# DotNet generated files
+##################################
+*.vspscc
+*.vssscc
+.vs/
+*.pidb
+*.dbmdl
+*.bak
+*.backup
+
+##################################
+# ASP.NET HTTPS Certs
+##################################
+**/Properties/launchSettings.json
+C:/Users/*/AppData/Local/ASP.NET/https/*
+*.pfx
+
+##################################
+# Entity Framework
+##################################
+Migrations/
+
+##################################
+# Logs
+##################################
+*.log
+logs/
+
+##################################
+# Test Results
+##################################
+TestResults/
+*.coverage
+*.coveragexml
+*.testsettings
+*.vsmdi
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+##################################
+# Publish output
+##################################
+.publish/
+*.publish.xml
+
+##################################
+# npm & yarn
+##################################
+node_modules/
+yarn.lock
+package-lock.json
+
+##################################
+# Docker
+##################################
+**/*.tar
+*.dockerfile
+docker-compose.override.yml
+
+##################################
+# Secrets and Environment
+##################################
+.env
+*.secrets.json
+*.secret
+secrets.json
+secrets/
+
+##################################
+# JetBrains Rider
+##################################
+.idea/
+.idea/**
+
+##################################
+# Visual Studio Code
+##################################
+.vscode/
+.history/
+
+##################################
+# Backup & Temporary
+##################################
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+
+##################################
+# Coverage reports
+##################################
+coverage/
+lcov-report/
+coverage-final.json
+.nyc_output/
+
+##################################
+# SQL Server files
+##################################
+*.mdf
+*.ldf
+*.ndf
+*.sql
+
+##################################
+# NuGet
+##################################
+*.nupkg
+*.snupkg
+.nuget/
+
+##################################
+# Local tools
+##################################
+.tool/
+
+##################################
+# Others
+##################################
+*.tgz
