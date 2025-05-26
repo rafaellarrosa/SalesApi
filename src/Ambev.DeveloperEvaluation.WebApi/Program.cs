@@ -5,9 +5,13 @@ using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.IoC;
 using Ambev.DeveloperEvaluation.ORM;
+using Ambev.DeveloperEvaluation.WebApi.Messaging.Handlers;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rebus.Config;
+using Rebus.ServiceProvider;
+using Rebus.Transport.FileSystem;
 using Serilog;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
@@ -35,7 +39,14 @@ public class Program
                     b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
                 )
             );
-
+            
+            // ✅ Configuração do Rebus usando FileSystem como transport
+            builder.Services.AddRebus(configure => configure
+                .Transport(t => t.UseFileSystem(@"C:\rebus-queue", "developer-evaluation-queue"))
+            );
+            
+            builder.Services.AutoRegisterHandlersFromAssemblyOf<SaleCreatedEventHandler>();
+            
             builder.Services.AddJwtAuthentication(builder.Configuration);
 
             builder.RegisterDependencies();

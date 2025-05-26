@@ -5,6 +5,7 @@ using Ambev.DeveloperEvaluation.Unit.Application.Sales.TestData;
 using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
+using Rebus.Bus;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Sales;
@@ -15,7 +16,6 @@ namespace Ambev.DeveloperEvaluation.Unit.Application.Sales;
 public class CreateSaleHandlerTests
 {
     private readonly ISaleRepository _saleRepository;
-    private readonly IMapper _mapper;
     private readonly CreateSaleHandler _handler;
 
     /// <summary>
@@ -24,12 +24,12 @@ public class CreateSaleHandlerTests
     /// </summary>
     public CreateSaleHandlerTests()
     {
+        var bus = Substitute.For<IBus>();
         _saleRepository = Substitute.For<ISaleRepository>();
-        // var configuration = new MapperConfiguration(cfg => { cfg.AddProfile<CreateSaleProfile>(); });
-        //
-        // _mapper = configuration.CreateMapper();
-        _mapper = Substitute.For<IMapper>();
-        _handler = new CreateSaleHandler(_saleRepository, _mapper);
+        var configuration = new MapperConfiguration(cfg => cfg.AddProfile<CreateSaleProfile>());
+
+        var mapper = configuration.CreateMapper();
+        _handler = new CreateSaleHandler(_saleRepository, mapper, bus);
     }
 
     /// <summary>
